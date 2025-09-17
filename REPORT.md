@@ -1,6 +1,7 @@
 # Silver Medal Solution for Novozymes Enzyme Stability Prediction (Kaggle, 2023)
 
-**Authors:** Your Name, Friend’s Name  
+**Authors:** Chuanwan(Christine) Wu, Haoyuan Liu
+
 **Result:** Silver Medal — Top 1% (24/2482 teams)
 
 ---
@@ -58,12 +59,22 @@ Leaderboard: **24 / 2482 (Silver)**
 - **Outputs:** models → `outputs/models/`, submissions → `outputs/submissions/`, CV logs → `outputs/cv_logs/`.
 
 ## 8. Repository Map
+
+```
 .
-├── README.md
-├── report.md
-├── requirements.txt
-├── src/
-│   ├── train.py
-│   └── predict.py
-├── data/              # (gitignored)
-└── outputs/           # (gitignored)
+├─ README.md
+├─ report.md
+├─ requirements.txt
+├─ src/
+│  ├─ data.py
+│  ├─ features.py
+│  ├─ models.py
+│  ├─ validate.py
+│  ├─ train.py
+│  └─ predict.py
+├─ data/              # (gitignored)
+└─ outputs/
+   ├─ models/
+   ├─ cv_logs/
+   └─ submissions/
+```
