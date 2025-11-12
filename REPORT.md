@@ -4,7 +4,6 @@
 ![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
 ![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
 ![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c?logo=pytorch)
-![License](https://img.shields.io/badge/License-MIT-green)
 
 ## Table of Contents
 - [About](#about)  
@@ -17,7 +16,6 @@
 - [Models](#models)  
 - [Ensembling Strategy](#ensembling-strategy)  
 - [Validation & Metrics](#validation--metrics)  
-- [Ablations](#ablations)  
 - [Error Analysis](#error-analysis)  
 - [Limitations](#limitations)  
 - [Future Work](#future-work)  
