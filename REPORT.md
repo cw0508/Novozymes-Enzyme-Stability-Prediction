@@ -1,7 +1,5 @@
 # Novozymes Enzyme Stability Prediction
 
-This repository contains the 24th place solution for the Novozymes Enzyme Stability Prediction competition.
-
 - **Author:** [Chuanwan(Christine) Wu, Haoyuan Liu]
 - **Submission Date:** [Jan, 2023]
 - **Competition:** [Novozymes Enzyme Stability Prediction](https://www.kaggle.com/competitions/novozymes-enzyme-stability-prediction)
@@ -25,7 +23,7 @@ This repository contains the 24th place solution for the Novozymes Enzyme Stabil
 
 ## About
 
-This project addresses the **Novozymes Enzyme Stability Prediction** Kaggle competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
+This repository contains the 24th place solution for the Novozymes Enzyme Stability Prediction competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
 
 ## Summary of Results
 
