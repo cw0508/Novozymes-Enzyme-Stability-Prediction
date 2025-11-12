@@ -30,6 +30,36 @@ The solution combined multiple approaches:
 - **Simple Ensembling**: Rank-based blending of different prediction strategies  
 - **Baseline Methods**: ESM-2 contact maps and pure structural approaches  
 
+Best submission achieved competitive performance through careful feature engineering and strategic model combination.
+
+---
+
+## Approach Overview
+
+```mermaid
+graph TD
+    A[Raw Data] --> B[Feature Engineering];
+    B --> C[XGBoost Model];
+    B --> D[Structural Features];
+    B --> E[ESM-2 Analysis];
+    C --> F[Predictions];
+    D --> F;
+    E --> F;
+    F --> G[Rank Ensemble];
+    G --> H[Final Submission];
+
+## About
+
+This project addresses the **Novozymes Enzyme Stability Prediction** Kaggle competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
+
+## Summary of Results
+
+The solution combined multiple approaches:
+- **Primary Model**: XGBoost with comprehensive feature engineering  
+- **Structural Features**: B-factor and SASA from PDB files  
+- **Simple Ensembling**: Rank-based blending of different prediction strategies  
+- **Baseline Methods**: ESM-2 contact maps and pure structural approaches  
+
 ---
 
 ## Approach Overview
