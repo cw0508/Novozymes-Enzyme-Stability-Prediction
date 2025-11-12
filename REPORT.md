@@ -3,9 +3,8 @@
 This repository contains the 24th place solution for the Novozymes Enzyme Stability Prediction competition. he goal of this competition is to predict the thermostability of enzyme variants. 
 
 - **Author:** [Chuanwan(Christine) Wu, Haoyuan Liu]
-- **Competition:** [Novozymes Enzyme Stability Prediction](https://www.kaggle.com/competitions/novozymes-enzyme-stability-prediction)
 - **Submission Date:** [Jan, 2023]
-
+- **Competition:** [Novozymes Enzyme Stability Prediction](https://www.kaggle.com/competitions/novozymes-enzyme-stability-prediction)
 ---
 
 ![Novozymes](https://img.shields.io/badge/Competition-Novozymes-blue?logo=kaggle)
