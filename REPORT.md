@@ -14,7 +14,7 @@
 - [Ensemble Strategy](#ensemble-strategy)  
 - [Validation & Results](#validation--results)  
 - [Challenges & Limitations](#challenges--limitations)  
-- [Future Work](#future-work)  
+- [Future Work](#future-work)
 
 ## About
 
@@ -31,7 +31,6 @@ The solution combined multiple approaches:
 ---
 
 ## Approach Overview
-
 ```mermaid
 graph TD
     A[Data Acquisition] --> B[Preprocessing];
@@ -52,8 +51,8 @@ graph TD
     D --> D1[XGBoost];
     D --> D2[Neural Networks];
     D --> D3[ThermoNet];
-```
 
+```
 ---
 
 ## Feature Engineering
@@ -171,3 +170,9 @@ This approach leveraged **relative ordering** rather than absolute values from d
 - **Transfer Learning:** Pre-training on larger protein datasets  
 
 ---
+
+## Conclusion
+
+This project demonstrates a practical, feature-engineered approach to protein stability prediction that balances computational efficiency with competitive performance. The combination of sequence-based machine learning with structural bioinformatics insights provides a robust framework for enzyme engineering applications.
+
+*All code is available in the accompanying Jupyter notebook.*
