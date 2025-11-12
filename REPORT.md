@@ -3,163 +3,164 @@
 ![Novozymes](https://img.shields.io/badge/Competition-Novozymes-blue?logo=kaggle)
 ![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
 ![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
-![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c?logo=pytorch)
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python)
 
 ## Table of Contents
 - [About](#about)  
 - [Summary of Results](#summary-of-results)  
-- [Codeflow](#codeflow)  
-- [Workspace & Environment](#workspace--environment)    
-- [Feature Representations](#feature-representations)  
+- [Approach Overview](#approach-overview)  
+- [Feature Engineering](#feature-engineering)  
 - [Models](#models)  
-- [Ensembling Strategy](#ensembling-strategy)  
-- [Validation & Metrics](#validation--metrics)  
-- [Error Analysis](#error-analysis)  
-- [Limitations](#limitations)  
+- [Ensemble Strategy](#ensemble-strategy)  
+- [Validation & Results](#validation--results)  
+- [Challenges & Limitations](#challenges--limitations)  
 - [Future Work](#future-work)  
-- [References](#references)  
 
 ---
 
 ## About
 
-This project tackles the **Novozymes Enzyme Stability Prediction** Kaggle competition, which aims to predict the thermal stability of enzyme variants. Enhanced enzyme stability can significantly improve industrial processes by enabling enzymes to function under harsh conditions. The challenge involves predicting melting temperatures (Tm) from protein sequence data and structural information.
+This project addresses the **Novozymes Enzyme Stability Prediction** Kaggle competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
 
 ## Summary of Results
 
-The final solution employs a multi-faceted approach combining:
-- **XGBoost regression** with engineered sequence features
-- **Structural features** including B-factor and SASA (Solvent Accessible Surface Area)
-- **Ensemble methods** blending multiple prediction strategies
-- **ESM-2 protein language model** for contact map analysis
+The solution combined multiple approaches:
+- **Primary Model**: XGBoost with comprehensive feature engineering  
+- **Structural Features**: B-factor and SASA from PDB files  
+- **Simple Ensembling**: Rank-based blending of different prediction strategies  
+- **Baseline Methods**: ESM-2 contact maps and pure structural approaches  
 
-Best submission achieved competitive performance on the private leaderboard through careful feature engineering and model ensembling.
+---
 
-## Codeflow
+## Approach Overview
 
 ```mermaid
 graph TD
-    A[Data Acquisition] --> B[Preprocessing];
-    B --> C[Feature Engineering];
-    C --> D[Model Training];
-    D --> E[Prediction];
-    E --> F[Ensembling];
-    F --> G[Submission];
-    
-    B --> B1[Sequence Alignment];
-    B --> B2[PDB Processing];
-    B --> B3[Levenshtein Grouping];
-    
-    C --> C1[Sequence Features];
-    C --> C2[Structural Features];
-    C --> C3[ESM Embeddings];
-    
-    D --> D1[XGBoost];
-    D --> D2[Neural Networks];
-    D --> D3[ThermoNet];
+    A[Raw Data] --> B[Feature Engineering];
+    B --> C[XGBoost Model];
+    B --> D[Structural Features];
+    B --> E[ESM-2 Analysis];
+    C --> F[Predictions];
+    D --> F;
+    E --> F;
+    F --> G[Rank Ensemble];
+    G --> H[Final Submission];
 ```
 
 ---
 
-## Feature Representations
+## Feature Engineering
 
-Feature engineering was central to the pipeline, combining **sequence-based**, **structural**, and **language-model-derived** features:
+### Sequence-Based Features
+- **Basic Statistics:** Sequence length, unique amino acid count  
+- **Amino Acid Composition:** Percentage of each amino acid type  
+- **Chemical Groups:** Hydrophobic, polar, charged, special amino acid proportions  
+- **Mutation Identification:** Position and type of mutations relative to wildtype  
 
-- **Sequence Features:**  
-  Encoded amino acid properties such as hydrophobicity, charge, and polarity. Additionally, Levenshtein-grouped sequences ensured robust training by clustering mutations relative to wild-type sequences.
+### Structural Features
+- **B-factor:** Atomic displacement parameters from PDB files  
+- **SASA:** Solvent Accessible Surface Area using Shrake-Rupley algorithm  
+- **PDB Processing:** Automated extraction from mutant structure files  
 
-- **Structural Features:**  
-  Derived from **PDB files** using **BioPandas** and **Bio.PDB**, including:
-  - **B-factor (temperature factor):** Reflecting atomic mobility and structural flexibility.  
-  - **SASA (Solvent Accessible Surface Area):** Computed with the **Shrake-Rupley algorithm** and normalized per residue.  
-  - **Contact map** and **secondary structure** information were optionally extracted for correlation with ESM embeddings.
-
-- **ESM Embeddings:**  
-  The **ESM-2 protein language model** generated residue-level embeddings capturing evolutionary and contextual dependencies. These were averaged or reduced via PCA for compatibility with regression models.
+### External Features
+- **Levenshtein Distance:** Sequence similarity grouping  
+- **BLOSUM62 Scores:** Substitution matrix values for mutations  
 
 ---
 
 ## Models
 
-Three main modeling approaches were used:
+### 1. XGBoost Regressor (Primary)
 
-1. **XGBoost Regression:**  
-   - Input: concatenated engineered features.  
-   - Objective: `reg:squarederror`  
-   - Tuned hyperparameters included `learning_rate`, `max_depth`, `subsample`, and `colsample_bytree`.  
-   - Provided strong baseline performance and interpretability via feature importance plots.
+```python
+model = xgb.XGBRegressor(n_estimators=140, max_depth=4)
+```
 
-2. **Neural Network (PyTorch / TensorFlow):**  
-   - Architecture: Fully connected layers with dropout and batch normalization.  
-   - Activation: ReLU; Output: linear regression head predicting `ΔTm`.  
-   - Optimization: Adam with cosine learning rate decay and early stopping.  
-   - Though implemented, this model was **less stable** and not optimal for the final ensemble.
+- Handled mixed feature types effectively  
+- Provided robust baseline performance  
+- Enabled feature importance analysis  
 
-3. **ThermoNet-Inspired CNN:**  
-   - A lightweight adaptation of **ThermoNet**, modeling residue neighborhoods using physicochemical grids.  
-   - Integrated SASA and B-factor channels to approximate 3D context.
+### 2. Neural Network (Exploratory)
+- Simple fully-connected architecture  
+- Limited success compared to XGBoost  
+- Used primarily for comparison  
 
----
+### 3. ESM-2 Contact Maps
+- Protein language model for evolutionary information  
+- Contact map analysis for stability prediction  
+- Provided complementary signals  
 
-## Ensembling Strategy
-
-To boost generalization and leaderboard robustness:
-- **Weighted blending** combined XGBoost, ThermoNet CNN, and ESM embedding regressors.  
-- Blend weights were tuned via cross-validation using out-of-fold (OOF) predictions.  
-- Final ensemble prediction:  
-  \[
-  \hat{y} = w_1 \cdot y_{XGB} + w_2 \cdot y_{ThermoNet} + w_3 \cdot y_{ESM}
-  \]
-- This strategy mitigated overfitting from single-model idiosyncrasies and captured complementary feature strengths.
+### 4. Pure Structural Approaches
+- Direct use of B-factor differences  
+- SASA-based predictions  
+- Served as baseline methods  
 
 ---
 
-## Validation & Metrics
+## Ensemble Strategy
 
-- **Validation Split:**  
-  Grouped by protein sequence clusters to prevent data leakage between homologous variants.  
-  The hold-out set ensured distributional similarity to Kaggle’s test set.
+Final submission used **rank-based ensembling**:
 
-- **Primary Metrics:**  
-  - **Spearman’s rank correlation**: measured monotonic relationship between predicted and true stability values.  
-  - **Mean Absolute Error (MAE):** secondary metric for interpretability.
+```python
+# Weighted combination of ranked predictions
+final_rank = (0.15 * rankdata(structural_predictions) +
+              0.78 * rankdata(xgboost_predictions) +
+              0.07 * rankdata(other_predictions)) / total_samples
+```
 
-- **Cross-Validation:**  
-  5-fold grouped CV with stratification by sequence group, ensuring robustness and variance tracking across folds.
-
----
-
-## Error Analysis
-
-Analysis revealed:
-- **Overestimation** of stability for highly mutated or structurally unstable variants.  
-- **Underperformance** on rare motifs not well represented in the ESM embedding space.  
-- Structural features (SASA, B-factor) were noisier for PDB files with incomplete residues.
-
-Visualization of residuals confirmed that **sequence length** and **mutation density** were key error drivers.
+This approach leveraged **relative ordering** rather than absolute values from different methods, improving leaderboard robustness.
 
 ---
 
-## Limitations
+## Validation & Results
 
-- **Dataset sparsity:** few labeled variants per family.  
-- **Noisy structure-derived features:** dependency on PDB prediction quality.  
-- **Limited thermodynamic context:** stability influenced by factors not captured (e.g., solvent composition).
+### Validation Strategy
+- **Train-Test Split:** 80-20 random split  
+- **Metrics:** Spearman correlation, MAE  
+- **Cross-Validation:** Basic k-fold validation  
+
+### Key Findings
+- XGBoost with comprehensive features provided strongest individual performance  
+- Structural features (B-factor, SASA) offered valuable complementary information  
+- Simple ensembling improved robustness over single models  
+- Sequence-based features were more reliable than structure-only approaches  
+
+---
+
+## Challenges & Limitations
+
+### Data Challenges
+- **Limited Training Data:** ~2,400 labeled variants  
+- **Structural Coverage:** Not all mutants had reliable PDB structures  
+- **Experimental Noise:** Variability in Tm measurements  
+
+### Technical Limitations
+- **Computational Constraints:** Limited molecular dynamics simulations  
+- **PDB Quality:** Variable quality in predicted structures  
+- **Feature Engineering:** Manual feature design vs. learned representations  
+
+### Model Limitations
+- Limited success with neural networks  
+- ESM-2 underutilized due to computational constraints  
+- ThermoNet imported but not fully implemented  
 
 ---
 
 ## Future Work
 
-- Incorporate **AlphaFold2-multimer** predictions for structural context.  
-- Fine-tune **ESM-2 embeddings** for thermal stability regression.  
-- Explore **Graph Neural Networks (GNNs)** to directly model residue-residue interactions.  
-- Integrate **Bayesian ensembling** for uncertainty quantification.
+### Immediate Improvements
+- **Better Feature Engineering:** Dihedral angles, secondary structure  
+- **Advanced Ensembling:** Neural network meta-learners  
+- **Hyperparameter Optimization:** Systematic tuning of all models  
+
+### Technical Enhancements
+- **Full ESM-2 Fine-tuning:** Domain adaptation for stability prediction  
+- **Graph Neural Networks:** Direct protein structure processing  
+- **AlphaFold2 Integration:** Improved structural features  
+
+### Methodological Improvements
+- **Cross-Validation Strategy:** Grouped k-fold by protein families  
+- **Uncertainty Quantification:** Bayesian methods for confidence intervals  
+- **Transfer Learning:** Pre-training on larger protein datasets  
 
 ---
-
-## References
-
-- Novozymes Enzyme Stability Prediction, Kaggle Competition  
-- Rao et al., "Transformer Protein Language Models" (ESM-2, Meta AI)  
-- Li et al., "ThermoNet: Structure-based Thermostability Prediction"  
-- XGBoost Documentation  
