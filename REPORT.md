@@ -60,8 +60,6 @@ graph TD
     D --> D2[Neural Networks];
     D --> D3[ThermoNet];
 
-
-
 ## Feature Engineering
 
 ### Sequence-Based Features
