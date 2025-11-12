@@ -3,41 +3,36 @@
 ![Novozymes](https://img.shields.io/badge/Competition-Novozymes-blue?logo=kaggle)
 ![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
 ![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
-![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c?logo=pytorch)
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python)
 
 ## Table of Contents
 - [About](#about)  
 - [Summary of Results](#summary-of-results)  
-- [Codeflow](#codeflow)  
-- [Workspace & Environment](#workspace--environment)  
-- [Dataset](#dataset)  
-- [Reproducing the Pipeline](#reproducing-the-pipeline)  
-- [Feature Representations](#feature-representations)  
+- [Approach Overview](#approach-overview)  
+- [Feature Engineering](#feature-engineering)  
 - [Models](#models)  
-- [Ensembling Strategy](#ensembling-strategy)  
-- [Validation & Metrics](#validation--metrics)  
-- [Error Analysis](#error-analysis)  
-- [Limitations](#limitations)  
+- [Ensemble Strategy](#ensemble-strategy)  
+- [Validation & Results](#validation--results)  
+- [Challenges & Limitations](#challenges--limitations)  
 - [Future Work](#future-work)  
-- [References](#references)  
 
 ---
 
 ## About
 
-This project tackles the **Novozymes Enzyme Stability Prediction** Kaggle competition, which aims to predict the thermal stability of enzyme variants. Enhanced enzyme stability can significantly improve industrial processes by enabling enzymes to function under harsh conditions. The challenge involves predicting melting temperatures (Tm) from protein sequence data and structural information.
+This project addresses the **Novozymes Enzyme Stability Prediction** Kaggle competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
 
 ## Summary of Results
 
-The final solution employs a multi-faceted approach combining:
-- **XGBoost regression** with engineered sequence features
-- **Structural features** including B-factor and SASA (Solvent Accessible Surface Area)
-- **Ensemble methods** blending multiple prediction strategies
-- **ESM-2 protein language model** for contact map analysis
+The solution combined multiple approaches:
+- **Primary Model**: XGBoost with comprehensive feature engineering  
+- **Structural Features**: B-factor and SASA from PDB files  
+- **Simple Ensembling**: Rank-based blending of different prediction strategies  
+- **Baseline Methods**: ESM-2 contact maps and pure structural approaches  
 
-Best submission achieved competitive performance on the private leaderboard through careful feature engineering and model ensembling.
+---
 
-## Codeflow
+## Approach Overview
 
 ```mermaid
 graph TD
@@ -59,6 +54,9 @@ graph TD
     D --> D1[XGBoost];
     D --> D2[Neural Networks];
     D --> D3[ThermoNet];
+```
+
+---
 
 ## Feature Engineering
 
