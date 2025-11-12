@@ -1,4 +1,10 @@
-# Novozymes Enzyme Stability Prediction — REPORT
+# Novozymes Enzyme Stability Prediction
+
+![Novozymes](https://img.shields.io/badge/Competition-Novozymes-blue?logo=kaggle)
+![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
+![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
+![PyTorch](https://img.shields.io/badge/Framework-PyTorch-ee4c2c?logo=pytorch)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## Table of Contents
 - [About](#about)  
