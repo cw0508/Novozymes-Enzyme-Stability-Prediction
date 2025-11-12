@@ -166,16 +166,6 @@ This approach leveraged **relative ordering** rather than absolute values from d
 - **Advanced Ensembling:** Neural network meta-learners  
 - **Hyperparameter Optimization:** Systematic tuning of all models  
 
-### Technical Enhancements
-- **Full ESM-2 Fine-tuning:** Domain adaptation for stability prediction  
-- **Graph Neural Networks:** Direct protein structure processing  
-- **AlphaFold2 Integration:** Improved structural features  
-
-### Methodological Improvements
-- **Cross-Validation Strategy:** Grouped k-fold by protein families  
-- **Uncertainty Quantification:** Bayesian methods for confidence intervals  
-- **Transfer Learning:** Pre-training on larger protein datasets  
-
 ---
 
 ## Conclusion
