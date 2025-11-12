@@ -16,8 +16,6 @@
 - [Challenges & Limitations](#challenges--limitations)  
 - [Future Work](#future-work)  
 
----
-
 ## About
 
 This project addresses the **Novozymes Enzyme Stability Prediction** Kaggle competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
