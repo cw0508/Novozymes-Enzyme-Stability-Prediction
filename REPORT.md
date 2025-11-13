@@ -23,7 +23,6 @@
 - [Key Scientific Insights](#key-scientific-insights)  
 - [Pipeline Architecture](#pipeline-architecture)  
 - [Results & Validation](#results--validation)  
-- [Challenges & Limitations](#challenges--limitations)  
 - [Future Work](#future-work)
 
 ## About
@@ -145,25 +144,6 @@ This approach leveraged **relative ordering** rather than absolute values from d
 - Structural features (B-factor, SASA) offered valuable complementary information  
 - Simple ensembling improved robustness over single models  
 - Sequence-based features were more reliable than structure-only approaches  
-
----
-
-## Challenges & Limitations
-
-### Data Challenges
-- **Limited Training Data:** ~2,400 labeled variants  
-- **Structural Coverage:** Not all mutants had reliable PDB structures  
-- **Experimental Noise:** Variability in Tm measurements  
-
-### Technical Limitations
-- **Computational Constraints:** Limited molecular dynamics simulations  
-- **PDB Quality:** Variable quality in predicted structures  
-- **Feature Engineering:** Manual feature design vs. learned representations  
-
-### Model Limitations
-- Limited success with neural networks  
-- ESM-2 underutilized due to computational constraints  
-- ThermoNet imported but not fully implemented  
 
 ---
 
