@@ -148,8 +148,6 @@ This approach leveraged **relative ordering** rather than absolute values from d
 ---
 
 ## Future Work
-
-### Immediate Improvements
 - **Better Feature Engineering:** Dihedral angles, secondary structure  
 - **Advanced Ensembling:** Neural network meta-learners  
 - **Hyperparameter Optimization:** Systematic tuning of all models  
