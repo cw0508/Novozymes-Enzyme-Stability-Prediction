@@ -9,6 +9,9 @@
 ![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
 ![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
 ![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
+# Novozymes Enzyme Stability Prediction
 
 ## Table of Contents
 - [About](#about)  
@@ -17,45 +20,49 @@
 - [Feature Engineering](#feature-engineering)  
 - [Models](#models)  
 - [Ensemble Strategy](#ensemble-strategy)  
-- [Validation & Results](#validation--results)  
+- [Key Scientific Insights](#key-scientific-insights)  
+- [Pipeline Architecture](#pipeline-architecture)  
+- [Results & Validation](#results--validation)  
 - [Challenges & Limitations](#challenges--limitations)  
 - [Future Work](#future-work)
 
 ## About
 
-This repository contains the 24th place solution for the Novozymes Enzyme Stability Prediction competition, predicting thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
+This repository contains a comprehensive solution for the Novozymes Enzyme Stability Prediction competition, implementing multiple computational approaches to predict thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
 
 ## Summary of Results
 
-The solution combined multiple approaches:
-- **Primary Model**: XGBoost with comprehensive feature engineering  
-- **Structural Features**: B-factor and SASA from PDB files  
-- **Simple Ensembling**: Rank-based blending of different prediction strategies  
-- **Baseline Methods**: ESM-2 contact maps and pure structural approaches  
+**Multi-Model Pipeline Combining:**
+- **Primary Model**: XGBoost with engineered sequence + structural features
+- **Structural Approaches**: B-factor differences and SASA analysis from PDB structures  
+- **Deep Learning**: ESM-2 contact maps and evolutionary embeddings
+- **Ensemble Methods**: Rank-based blending of diverse prediction strategies
 
 ---
 
 ## Approach Overview
+
 ```mermaid
 graph TD
-    A[Data Acquisition] --> B[Preprocessing];
+    A[Raw Protein Sequences] --> B[Data Preprocessing];
     B --> C[Feature Engineering];
-    C --> D[Model Training];
-    D --> E[Prediction];
-    E --> F[Ensembling];
-    F --> G[Submission];
+    C --> D[Multi-Model Training];
+    D --> E[Prediction & Validation];
+    E --> F[Rank-Based Ensembling];
+    F --> G[Final Submission];
     
-    B --> B1[Sequence Alignment];
-    B --> B2[PDB Processing];
-    B --> B3[Levenshtein Grouping];
+    B --> B1[Sequence Alignment & Mutation Detection];
+    B --> B2[PDB Structure Processing];
+    B --> B3[Levenshtein Distance Grouping];
     
-    C --> C1[Sequence Features];
-    C --> C2[Structural Features];
-    C --> C3[ESM Embeddings];
+    C --> C1[Sequence Composition Features];
+    C --> C2[Structural Biophysics Features];
+    C --> C3[Evolutionary Conservation Features];
     
-    D --> D1[XGBoost];
-    D --> D2[Neural Networks];
-    D --> D3[ThermoNet];
+    D --> D1[XGBoost Regressor];
+    D --> D2[ESM-2 Contact Maps];
+    D --> D3[B-Factor Difference Model];
+    D --> D4[SASA + BLOSUM Model];
 
 ```
 ---
