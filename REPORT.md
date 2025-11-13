@@ -28,7 +28,7 @@
 
 ## About
 
-This repository contains a comprehensive solution for the Novozymes Enzyme Stability Prediction competition, implementing multiple computational approaches to predict thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
+This repository contains a comprehensive 24th silver medal solution for the Novozymes Enzyme Stability Prediction competition, implementing multiple computational approaches to predict thermal stability (melting temperature Tm) of enzyme variants from protein sequences and structural data.
 
 ## Summary of Results
 
