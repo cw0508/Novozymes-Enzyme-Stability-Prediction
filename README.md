@@ -1,6 +1,16 @@
 # Novozymes Enzyme Stability Prediction – README
 
 - **Author:** [Chuanwan(Christine) Wu, Haoyuan Liu]
+- **Submission Date:** [Jan, 2023]
+- **Competition:** [Novozymes Enzyme Stability Prediction](https://www.kaggle.com/competitions/novozymes-enzyme-stability-prediction)
+---
+
+![Novozymes](https://img.shields.io/badge/Competition-Novozymes-blue?logo=kaggle)
+![Kaggle](https://img.shields.io/badge/Platform-Kaggle-20beff?logo=kaggle)
+![XGBoost](https://img.shields.io/badge/Model-XGBoost-orange?logo=xgboost)
+![Python](https://img.shields.io/badge/Language-Python-3776AB?logo=python)
+![Status](https://img.shields.io/badge/Status-Completed-success)
+
 
 This repository contains a **silver medal (24th place)** solution for the **Novozymes Enzyme Stability Prediction** competition on Kaggle. The project focuses on predicting the thermal stability (Tm value) of enzyme variants using a combination of **sequence-based**, **structural**, and **evolutionary** features, along with a **multi-model ensemble strategy**.
 
