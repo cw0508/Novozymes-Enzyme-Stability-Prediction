@@ -1,4 +1,4 @@
-# Novozymes Enzyme Stability Prediction – README
+# Novozymes Enzyme Stability Prediction
 
 - **Author:** [Chuanwan(Christine) Wu, Haoyuan Liu]
 - **Submission Date:** [Jan, 2023]
