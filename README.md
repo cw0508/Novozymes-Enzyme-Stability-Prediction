@@ -42,8 +42,6 @@ This repository contains a **silver medal (24th place)** solution for the **Novo
 
 ## 🤖 Models Used
 
-- **XGBoost Regressor** (main model using engineered features)  
-- **ESM-2 contact map regression model**  
 - **B-factor regression model**  
 - **SASA + BLOSUM62 hybrid structural model**  
 - **3D CNN** (voxel-based geometric deep learning)
